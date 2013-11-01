@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Simply Listing</title>
+		<meta name="description" content="">
+		<meta name="author" content="John Constance">
+	</head>
+
+	<body>
+		<header>
+			<a href="app.html"><h1>Simply Listing App</h1></a>
+			<h2>Documentation</h2>
+		</header>
+		<section>
+			<ul>
+				<li>
+					I used relative CSS, primarily percentages and em, to make sure that the app would be usable at different screen sizes and resolutions. I had initially intended to use Bootstrap CSS as a design library, but didn't think it was fitting with the spirit of the assignment.
+				</li>
+				<li>
+					I tried to make the app as lightweight as possible. As such, it is a SPA and almost everything is loaded in on initial page load to prevent further loading events later on. This was also done to make the phone as offline compatible as possible so that it would be realistic to use the app in a real world situation.
+				</li>
+				<li>
+					Additionally, I am using the google CDN for jquery in the hopes that the user will already have a cached copy of it and will not need to download it again, or failing that, will hopefully download it much quicker than otherwise.
+				</li>
+				<li>
+					In addition to the effort to minimize reliance on a server, the share link for the different lists actually opens a pre-filled email message on the client.
+				</li>
+				<li>
+					I used localStorage to store all client information locally to remove reliance on an outside database.
+					<ul>
+						<li>
+							I found a hashing function to hash the user's given password for some security.
+						</li>
+						<li>
+							The password was also salted.
+						</li>
+					</ul>
+				</li>
+				<li>
+					I used Google Fonts to pull in nicer fonts.
+				</li>
+				<li>
+					I used <a href="http://dryicons.com/">dryicons.com</a> for the icons.
+				</li>
+				<li>
+					I used the default modals to reduce outside dependencies.
+				</li>
+				<li>
+					I created four server side files to facilitate the syncing of data between the client and the server. The data is stored in a flat file and three php pages exist to register, login, and sync users.
+				</li>
+				<li>
+					I modified my design a little bit. Now the app does not distinguish between grocery and to-do lists and instead simply creates a generic list. This was done because it proved difficult to implement the two different list types and the addition of the special grocery list type didn't provide much utility for the effort that was required in creating it. Additionally, the functionality still exists, just the user has to specify the number of items in the item name field instead of seperately. This ultimately resulted in a simpler GUI and a more streamlined user experience.
+				</li>
+			</ul>
+		</section>
+	</body>
+</html>

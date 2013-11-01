@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Simply Listing</title>
+		<meta name="description" content="">
+		<meta name="author" content="John Constance">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+		<link href='http://fonts.googleapis.com/css?family=Raleway:400,700,900' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/main.css" />
+	</head>
+
+	<body>
+		<div class="container">
+			<span id="homeButton"><img src="img/home.png" alt="Home" title="Home" /></span>
+			<div class="text-center" id="pageTitle">
+				<h1>Simply Listing</h1>
+				<h3>Login</h3>
+			</div>
+			<div class="stage" id="stage-1" data-title="Login" data-stage="1">
+				<form id="formLogin" role="form">
+					<div class="form-group">
+						<label for="loginUsername">Username</label>
+						<input type="text" class="form-control" id="loginUsername" placeholder="Username">
+					</div>
+					<div class="form-group">
+						<label for="loginPassword">Password</label>
+						<input type="password" class="form-control" id="loginPassword" placeholder="Password">
+					</div>
+					<div class="form-group clearfix">
+						<button class="btn pull-left submit">
+							Submit
+						</button>
+						<button class="btn pull-right register">
+							Register
+						</button>
+					</div>
+				</form>
+			</div>
+			<div class="stage" id="stage-2" data-title="Home" data-stage="2">
+				<button class="btn btn-lg center viewLists">
+					View Lists
+				</button>
+				<button class="btn btn-lg center newList">
+					Create A list
+				</button>
+			</div>
+			<div class="stage" id="stage-3" data-title="Register" data-stage="3">
+				<form id="registerForm" role="form">
+					<div class="form-group">
+						<label for="registerEmail">Email</label>
+						<input type="email" class="form-control" id="registerEmail" placeholder="Email">
+					</div>
+					<div class="form-group">
+						<label for="registerUsername">Username</label>
+						<input type="text" class="form-control" id="registerUsername" placeholder="Username">
+					</div>
+					<div class="form-group">
+						<label for="registerPassword">Password</label>
+						<input type="password" class="form-control" id="registerPassword" placeholder="Password">
+					</div>
+					<div class="form-group clearfix">
+						<button class="btn submit">
+							Submit
+						</button>
+					</div>
+				</form>
+			</div>
+			<div class="stage" id="stage-5" data-title="Lists" data-stage="5">
+				<div class="search-container center clearfix">
+					<input type="text" class="form-control" id="listsSearch" placeholder="Search" />
+					<span class="pull-right"><img src="img/search.png" alt="Search" /></span>
+				</div>
+				<div class="lists-container">
+
+				</div>
+			</div>
+			<div class="stage" id="stage-6" data-name="" data-stage="6">
+				<div class="search-container center clearfix">
+					<input type="text" class="form-control" id="listSearch" placeholder="Search" />
+					<span class="pull-right"><img src="img/search.png" alt="Search" /></span>
+				</div>
+				<div class="items-container">
+
+				</div>
+				<div class="new-item-container">
+					<input type="text" class="form-control" id="newListItem" placeholder="New Item" />
+				</div>
+				<div class="list-buttons">
+					<span class="share pull-left"><img src='img/mail.png' alt='Share'/></span>
+					<span class="sync pull-right"><img src='img/sync.png' alt='Sync'/></span>
+					<span class="reset"><img src='img/reset.png' alt='Reset'/></span>
+				</div>
+			</div>
+		</div>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="js/sha.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>
