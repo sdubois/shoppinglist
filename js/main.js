@@ -22,15 +22,15 @@ $(document).ready(function main() {
 			})
 		}, function loginAjax(data) {
 			var result = JSON.parse(data);
-			if (!result.login) {
+			if (result.login != null && result.login == false) {
+				alert("I couldn't find that combination of username and password. Please double check that you entered everything correctly.");
+			} else {
 				appStorage[username] = result;
 				appStorage.lastUser = username;
 				appStorage.loggedUser = username;
 				goToStage({
 					stage : 2
 				});
-			} else {
-				alert("I couldn't find that combination of username and password. Please double check that you entered everything correctly.");
 			}
 
 			$("#loginPassword").val("");
