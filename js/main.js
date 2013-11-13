@@ -1,7 +1,7 @@
 /**
  * @author John Constance
  */
-$(document).ready(function() {
+$(document).ready(function main() {
 	if (!localStorage.jrc452grocery) {
 		setAppStorage({});
 	} else {
@@ -10,7 +10,7 @@ $(document).ready(function() {
 		appStorage.loggedUser = "";
 		setAppStorage(appStorage);
 	}
-	$("#formLogin .submit").on("click", function(e) {
+	$("#formLogin .submit").on("click", function login(e) {
 		e.preventDefault();
 		var username = $("#loginUsername").val();
 		var appStorage = getAppStorage();
@@ -20,7 +20,7 @@ $(document).ready(function() {
 				"username" : username,
 				"password" : password
 			})
-		}, function(data) {
+		}, function loginAjax(data) {
 			var result = JSON.parse(data);
 			if (!result.login) {
 				appStorage[username] = result;
@@ -43,7 +43,7 @@ $(document).ready(function() {
 			stage : 3
 		});
 	});
-	$("#registerForm .submit").on("click", function(e) {
+	$("#registerForm .submit").on("click", function register(e) {
 		e.preventDefault();
 		var email = $("#registerEmail").val();
 		var username = $("#registerUsername").val();
@@ -56,7 +56,7 @@ $(document).ready(function() {
 		};
 		$.get("register.php", {
 			"data" : JSON.stringify(storedUser)
-		}, function(data) {
+		}, function registerAjax(data) {
 			var result = JSON.parse(data);
 			if (result.register == true) {
 				var appStorage = getAppStorage();
@@ -72,7 +72,7 @@ $(document).ready(function() {
 			}
 		});
 	});
-	$("#stage-2 .newList").on("click", function(e) {
+	$("#stage-2 .newList").on("click", function newListEvent(e) {
 		e.preventDefault();
 		var name = prompt("Name of List?");
 		if (name != null) {
@@ -83,7 +83,7 @@ $(document).ready(function() {
 			});
 		}
 	});
-	$("#stage-2 .viewLists").on("click", function(e) {
+	$("#stage-2 .viewLists").on("click", function viewListsEvent(e) {
 		e.preventDefault();
 		var appStorage = getAppStorage();
 		if (Object.keys(appStorage[appStorage.loggedUser].lists).length > 0) {
@@ -95,7 +95,7 @@ $(document).ready(function() {
 			alert("You need to create a list first.");
 		}
 	});
-	$("#stage-5 .lists-container").on("click", ".list", function(e) {
+	$("#stage-5 .lists-container").on("click", ".list", function viewListEvent(e) {
 		e.stopPropagation();
 		loadList($(this).attr('data-name'));
 		goToStage({
@@ -103,24 +103,24 @@ $(document).ready(function() {
 			title : $(this).attr('data-name')
 		});
 	});
-	$("#stage-5 .lists-container").on("click", ".list .delete", function(e) {
+	$("#stage-5 .lists-container").on("click", ".list .delete", function deleteListEvent(e) {
 		e.stopPropagation();
 		var listElem = $(e.target).parent().parent();
 
 		deleteList(listElem.attr("data-name"));
 		listElem.remove();
 	});
-	$("#stage-5 .lists-container").on("click", ".list .share", function(e) {
+	$("#stage-5 .lists-container").on("click", ".list .share", function shareListEvent(e) {
 		e.stopPropagation();
 
 		shareList($(e.target).parent().parent().attr("data-name"));
 	});
-	$("#stage-5 .lists-container").on("click", ".list .reset", function(e) {
+	$("#stage-5 .lists-container").on("click", ".list .reset", function resetListEvent(e) {
 		e.stopPropagation();
 
 		resetList($(e.target).parent().parent().attr("data-name"));
 	});
-	$("#listsSearch").on("keyup", function(e) {
+	$("#listsSearch").on("keyup", function searchLists(e) {
 		var text = $(this).val();
 		if (text == "") {
 			$("#stage-5 .lists-container .list").show(0);
@@ -134,7 +134,7 @@ $(document).ready(function() {
 			});
 		}
 	});
-	$("#listSearch").on("keyup", function(e) {
+	$("#listSearch").on("keyup", function searchList(e) {
 		var text = $(this).val();
 		if (text == "") {
 			$("#stage-6 .items-container .item").show(0);
@@ -148,7 +148,7 @@ $(document).ready(function() {
 			});
 		}
 	});
-	$("#newListItem").on("change", function(e) {
+	$("#newListItem").on("change", function newListItemEvent(e) {
 		var appStorage = getAppStorage();
 		var list = appStorage[appStorage.loggedUser].lists[$("#stage-6").attr("data-name")];
 
@@ -172,7 +172,7 @@ $(document).ready(function() {
 
 		setAppStorage(appStorage);
 	});
-	$(".items-container").on("click", ".item input[type=checkbox]", function(e) {
+	$(".items-container").on("click", ".item input[type=checkbox]", function addItem(e) {
 		var appStorage = getAppStorage();
 		var list = appStorage[appStorage.loggedUser].lists[$("#stage-6").attr("data-name")];
 
@@ -185,11 +185,12 @@ $(document).ready(function() {
 		};
 		setAppStorage(appStorage);
 	});
-	$("#homeButton").on("click", function(e) {
+	$("#homeButton").on("click", function home(e) {
 		if (getAppStorage().loggedUser != "") {
 			goToStage({
 				stage : 2
 			});
+			syncUser();
 		} else {
 			goToStage({
 				stage : 1
@@ -309,11 +310,10 @@ function syncUser() {
 	user.username = appStorage.loggedUser;
 	$.get("sync.php", {
 		data : JSON.stringify(user)
-	}, function(syncedUser) {
+	}, function syncUserAjax(syncedUser) {
 		appStorage[appStorage.loggedUser] = JSON.parse(syncedUser);
 		setAppStorage(appStorage);
 	});
-
 }
 
 function deleteList(name) {
@@ -333,6 +333,8 @@ function getAppStorage() {
 }
 
 function setAppStorage(appStorage) {
+	console.log(arguments.callee.caller.name);
+	console.log(appStorage);
 	localStorage.setItem("jrc452grocery", JSON.stringify(appStorage));
 }
 
